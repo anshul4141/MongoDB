@@ -1,0 +1,270 @@
+Microsoft Windows [Version 10.0.19045.4170]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dell>mongosh
+Current Mongosh Log ID: 663c99057d7dd5136fcda456
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6
+Using MongoDB:          6.0.13
+Using Mongosh:          1.10.6
+mongosh 2.2.5 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-01T16:17:57.249+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use employee
+switched to db employee
+employee> db.emp
+employee.emp
+employee> db.emp.insertOne({firstName:"Shyam", lastName: "Yadav", email:"shyam@gmail,com", password:"pass123", salary:20000})
+MongoServerError: db already exists with different case already have: [Employee] trying to create [employee]
+employee> db.emp1.insertOne({firstName:"Shyam", lastName: "Yadav", email:"shyam@gmail,com", password:"pass123", salary:20000})
+MongoServerError: db already exists with different case already have: [Employee] trying to create [employee]
+employee> show databases;
+Employee   72.00 KiB
+admin      40.00 KiB
+anshul    168.00 KiB
+config    108.00 KiB
+local     104.00 KiB
+ncs        56.00 KiB
+ors       184.00 KiB
+temp       40.00 KiB
+user       72.00 KiB
+employee> use emp
+switched to db emp
+emp> db.emp1.insertOne({firstName:"Shyam", lastName: "Yadav", email:"shyam@gmail,com", password:"pass123", salary:20000})
+{
+  acknowledged: true,
+  insertedId: ObjectId("663c9b887d7dd5136fcda459")
+}
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9b887d7dd5136fcda459"),
+    firstName: 'Shyam',
+    lastName: 'Yadav',
+    email: 'shyam@gmail,com',
+    password: 'pass123',
+    salary: 20000
+  }
+]
+emp> db.emp1.insertMany([{firstName:"Uday", lastName: "Dabi", email:"uday@gmail,com", password:"pass123", salary:32000},{firstName:"Anish", lastName: "Malwiya", email:"anish@gmail.com", password:"pass123", salary:25000},{firstName:"Rahul", lastName: "gour", email:"rahul@gmail.com", password:"pass123", salary:45000}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("663c9cff7d7dd5136fcda45a"),
+    '1': ObjectId("663c9cff7d7dd5136fcda45b"),
+    '2': ObjectId("663c9cff7d7dd5136fcda45c")
+  }
+}
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9b887d7dd5136fcda459"),
+    firstName: 'Shyam',
+    lastName: 'Yadav',
+    email: 'shyam@gmail,com',
+    password: 'pass123',
+    salary: 20000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45b"),
+    firstName: 'Anish',
+    lastName: 'Malwiya',
+    email: 'anish@gmail.com',
+    password: 'pass123',
+    salary: 25000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'pass123',
+    salary: 45000
+  }
+]
+emp> db.emp1.updateOne({firstName:"Rahul"}, {$set:{password:"rahul@123"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9b887d7dd5136fcda459"),
+    firstName: 'Shyam',
+    lastName: 'Yadav',
+    email: 'shyam@gmail,com',
+    password: 'pass123',
+    salary: 20000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45b"),
+    firstName: 'Anish',
+    lastName: 'Malwiya',
+    email: 'anish@gmail.com',
+    password: 'pass123',
+    salary: 25000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.updateMany({salary:{$lt:25000}}, {$set:{department:"admin"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9b887d7dd5136fcda459"),
+    firstName: 'Shyam',
+    lastName: 'Yadav',
+    email: 'shyam@gmail,com',
+    password: 'pass123',
+    salary: 20000,
+    department: 'admin'
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45b"),
+    firstName: 'Anish',
+    lastName: 'Malwiya',
+    email: 'anish@gmail.com',
+    password: 'pass123',
+    salary: 25000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.deleteOne({department:"admin"})
+{ acknowledged: true, deletedCount: 1 }
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45b"),
+    firstName: 'Anish',
+    lastName: 'Malwiya',
+    email: 'anish@gmail.com',
+    password: 'pass123',
+    salary: 25000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.deleteMany({$lt:20000})
+MongoServerError: unknown top level operator: $lt. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+emp> db.emp1.deleteMany({salary:{$lt:20000}})
+{ acknowledged: true, deletedCount: 0 }
+emp> db.emp1.deleteMany({salary:{$lt:25000}})
+{ acknowledged: true, deletedCount: 0 }
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45b"),
+    firstName: 'Anish',
+    lastName: 'Malwiya',
+    email: 'anish@gmail.com',
+    password: 'pass123',
+    salary: 25000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.deleteMany({salary:{$lt:20000}})
+{ acknowledged: true, deletedCount: 0 }
+emp> db.emp1.deleteMany({salary:{$lt:30000}})
+{ acknowledged: true, deletedCount: 1 }
+emp> db.emp1.find()
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp>
