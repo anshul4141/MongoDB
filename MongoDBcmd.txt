@@ -268,3 +268,240 @@ emp> db.emp1.find()
   }
 ]
 emp>
+
+
+------------------------------------------------------------------------------
+
+Microsoft Windows [Version 10.0.19045.4170]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dell>mongosh
+Current Mongosh Log ID: 663dea8d4950d522902da504
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6
+Using MongoDB:          6.0.13
+Using Mongosh:          1.10.6
+mongosh 2.2.5 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-01T16:17:57.249+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use emp;
+switched to db emp
+emp> db.emp1.find();
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d34ff"),
+    firstName: 'Shubham',
+    lastName: 'Yadav',
+    email: 'shubham@gmail.com',
+    password: 'pass123',
+    salary: 52000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3500"),
+    firstName: 'Prachi',
+    lastName: 'Sharma',
+    email: 'prachi@gmail.com',
+    password: 'pass123',
+    salary: 42000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3501"),
+    firstName: 'Pratik',
+    lastName: 'Sharma',
+    email: 'sharma@gmail.com',
+    password: 'pass123',
+    salary: 3000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3502"),
+    firstName: 'Khushali',
+    lastName: 'Rathod',
+    email: 'Khushali@gmail.com',
+    password: 'pass123',
+    salary: 32000
+  }
+]
+emp> db.emp1.find().limit(2);
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.find().limit(2).skip(2);
+[
+  {
+    _id: ObjectId("663de61026d20b2bd64d34ff"),
+    firstName: 'Shubham',
+    lastName: 'Yadav',
+    email: 'shubham@gmail.com',
+    password: 'pass123',
+    salary: 52000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3500"),
+    firstName: 'Prachi',
+    lastName: 'Sharma',
+    email: 'prachi@gmail.com',
+    password: 'pass123',
+    salary: 42000
+  }
+]
+emp> db.emp1.find().sort({salary: -1})
+[
+  {
+    _id: ObjectId("663de61026d20b2bd64d34ff"),
+    firstName: 'Shubham',
+    lastName: 'Yadav',
+    email: 'shubham@gmail.com',
+    password: 'pass123',
+    salary: 52000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3500"),
+    firstName: 'Prachi',
+    lastName: 'Sharma',
+    email: 'prachi@gmail.com',
+    password: 'pass123',
+    salary: 42000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3502"),
+    firstName: 'Khushali',
+    lastName: 'Rathod',
+    email: 'Khushali@gmail.com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3501"),
+    firstName: 'Pratik',
+    lastName: 'Sharma',
+    email: 'sharma@gmail.com',
+    password: 'pass123',
+    salary: 3000
+  }
+]
+emp> db.emp1.find().sort({salary: -1}).limit(1).skip(1);
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  }
+]
+emp> db.emp1.find().sort({salary: 1}).limit(1).skip(1);
+[
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  }
+]
+emp> db.emp1.find().sort({salary: 1});
+[
+  {
+    _id: ObjectId("663de61026d20b2bd64d3501"),
+    firstName: 'Pratik',
+    lastName: 'Sharma',
+    email: 'sharma@gmail.com',
+    password: 'pass123',
+    salary: 3000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45a"),
+    firstName: 'Uday',
+    lastName: 'Dabi',
+    email: 'uday@gmail,com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3502"),
+    firstName: 'Khushali',
+    lastName: 'Rathod',
+    email: 'Khushali@gmail.com',
+    password: 'pass123',
+    salary: 32000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d3500"),
+    firstName: 'Prachi',
+    lastName: 'Sharma',
+    email: 'prachi@gmail.com',
+    password: 'pass123',
+    salary: 42000
+  },
+  {
+    _id: ObjectId("663c9cff7d7dd5136fcda45c"),
+    firstName: 'Rahul',
+    lastName: 'gour',
+    email: 'rahul@gmail.com',
+    password: 'rahul@123',
+    salary: 45000
+  },
+  {
+    _id: ObjectId("663de61026d20b2bd64d34ff"),
+    firstName: 'Shubham',
+    lastName: 'Yadav',
+    email: 'shubham@gmail.com',
+    password: 'pass123',
+    salary: 52000
+  }
+]
+emp> emp>
